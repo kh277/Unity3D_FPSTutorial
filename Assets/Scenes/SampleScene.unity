@@ -356,7 +356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunName: SubMAchineGun1
   range: 100
-  accuracy: 0
+  accuracy: 0.04
   fireRate: 0.1
   reloadTime: 2
   damage: 30
@@ -509,6 +509,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 64903244}
   go_CrosshairHUD: {fileID: 64903242}
+  theGunController: {fileID: 1755218868}
 --- !u!1 &587645828
 GameObject:
   m_ObjectHideFlags: 0
