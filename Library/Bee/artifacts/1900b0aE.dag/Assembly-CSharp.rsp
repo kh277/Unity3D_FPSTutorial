@@ -359,6 +359,7 @@
 "Assets/Scripts/Hand.cs"
 "Assets/Scripts/HandController.cs"
 "Assets/Scripts/PlayerController.cs"
+"Assets/Scripts/WeaponManager.cs"
 -langversion:9.0
 /deterministic
 /optimize+

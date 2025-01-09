@@ -354,7 +354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2851840c830acbd4dac93e0cf77fbc8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunName: SubMAchineGun1
+  gunName: SubMachineGun1
   range: 100
   accuracy: 0.04
   fireRate: 0.1
@@ -12099,6 +12099,7 @@ GameObject:
   - component: {fileID: 1755218867}
   - component: {fileID: 1755218868}
   - component: {fileID: 1755218869}
+  - component: {fileID: 1755218870}
   m_Layer: 2
   m_Name: Holder
   m_TagString: Untagged
@@ -12248,6 +12249,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1755218870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755218865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57650a8ef20b8c94991385d89920ad34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWeaponType: GUN
+  changeWeaponDelayTime: 0.1
+  changeWeaponEndDelayTime: 0.1
+  guns:
+  - {fileID: 270251466}
+  hands:
+  - {fileID: 1487959356}
+  theGunController: {fileID: 1755218868}
+  theHandController: {fileID: 1755218867}
 --- !u!1 &1815598130
 GameObject:
   m_ObjectHideFlags: 0
