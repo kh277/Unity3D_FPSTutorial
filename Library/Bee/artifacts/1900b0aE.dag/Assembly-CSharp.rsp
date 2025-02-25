@@ -362,6 +362,7 @@
 "Assets/Scripts/HandController.cs"
 "Assets/Scripts/PickaxeController.cs"
 "Assets/Scripts/PlayerController.cs"
+"Assets/Scripts/Rock.cs"
 "Assets/Scripts/WeaponManager.cs"
 "Assets/Scripts/WeaponSway.cs"
 -langversion:9.0
