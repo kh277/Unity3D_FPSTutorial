@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
     // 점프 시도
     private void TryJump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGround)
+        if (Input.GetKeyDown(KeyCode.Space) && isGround && theStatusController.GetCurrentSP() > 0)
         {
             Jump();
         }
@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
         // 앉은 상태에서 점프 시 앉기 해제
         if (isCrouch)
             Crouch();
-        theStatusController.DecreaseStamina(100);
+        theStatusController.DecreaseStamina(50);
         myRigid.velocity = transform.up * jumpForce;
     }
 
@@ -155,9 +155,9 @@ public class PlayerController : MonoBehaviour
     // 달리기 시도
     private void TryRun()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && theStatusController.GetCurrentSP() > 0)
             Running();
-        if (Input.GetKeyUp(KeyCode.LeftShift))
+        if (Input.GetKeyUp(KeyCode.LeftShift) || theStatusController.GetCurrentSP() <= 0)
             RunningCancel();
     }
 
@@ -170,7 +170,7 @@ public class PlayerController : MonoBehaviour
         theGunController.CancleFineSight();
 
         isRun = true;
-        theStatusController.DecreaseStamina(10);
+        theStatusController.DecreaseStamina(2);
         theCrosshair.RunningAnimation(isRun);
         applySpeed = runSpeed;
     }
