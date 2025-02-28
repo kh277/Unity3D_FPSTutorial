@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody myRigid;
     private GunController theGunController;
     private Crosshair theCrosshair;
+    private StatusController theStatusController;
 
     void Start()
     {
@@ -60,6 +61,7 @@ public class PlayerController : MonoBehaviour
         myRigid = GetComponent<Rigidbody>();
         theGunController = FindObjectOfType<GunController>();
         theCrosshair = FindObjectOfType<Crosshair>();
+        theStatusController = FindObjectOfType<StatusController>();
 
         // 초기화
         applySpeed = walkSpeed;
@@ -79,12 +81,14 @@ public class PlayerController : MonoBehaviour
         CharactorRotation();
     }
 
+    // 지면 체크
     private void IsGround()
     {   
         isGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.1f);
         theCrosshair.JumpingAnimation(!isGround);
     }
 
+    // 점프 시도
     private void TryJump()
     {
         if (Input.GetKeyDown(KeyCode.Space) && isGround)
@@ -93,23 +97,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // 점프
     private void Jump()
     {
         // 앉은 상태에서 점프 시 앉기 해제
         if (isCrouch)
             Crouch();
+        theStatusController.DecreaseStamina(100);
         myRigid.velocity = transform.up * jumpForce;
     }
 
-    private void TryRun()
-    {
-        if (Input.GetKey(KeyCode.LeftShift))
-            Running();
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-            RunningCancel();
-
-    }
-    
     // 앉기 시도
     private void TryCrouch()
     {
@@ -155,16 +152,25 @@ public class PlayerController : MonoBehaviour
         theCamera.transform.localPosition = new Vector3(0, applyCrouchPosY, 0f);
     }
 
+    // 달리기 시도
+    private void TryRun()
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+            Running();
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+            RunningCancel();
+    }
+
     // 달리기 실행
     private void Running()
     {
         // 앉기 상태에서 달리기 시 앉기 해제
         if (isCrouch)
             Crouch();
-        
         theGunController.CancleFineSight();
 
         isRun = true;
+        theStatusController.DecreaseStamina(10);
         theCrosshair.RunningAnimation(isRun);
         applySpeed = runSpeed;
     }
