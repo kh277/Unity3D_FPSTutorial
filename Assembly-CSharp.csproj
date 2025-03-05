@@ -69,8 +69,10 @@
     <Compile Include="Assets\Scripts\Gun.cs" />
     <Compile Include="Assets\Scripts\PickaxeController.cs" />
     <Compile Include="Assets\Scripts\GunController.cs" />
+    <Compile Include="Assets\Scripts\UI Script\Inventory.cs" />
     <Compile Include="Assets\HUD.cs" />
     <Compile Include="Assets\Scripts\CloseWeaponController.cs" />
+    <Compile Include="Assets\Scripts\UI Script\Slot.cs" />
     <Compile Include="Assets\Scripts\CloseWeapon.cs" />
     <Compile Include="Assets\Scripts\Rock.cs" />
     <Compile Include="Assets\Scripts\WeaponManager.cs" />

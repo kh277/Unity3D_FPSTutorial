@@ -19,6 +19,8 @@ public class ActionController : MonoBehaviour
     // 필요한 마스크 설정
     [SerializeField]
     private TextMeshProUGUI actionText;
+    [SerializeField]
+    private Inventory theInventory;
 
 
     void Update()
@@ -56,6 +58,7 @@ public class ActionController : MonoBehaviour
             if (hitInfo.transform != null)
             {
                 Debug.Log(hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + " 획득했습니다.");
+                theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item);
                 Destroy(hitInfo.transform.gameObject);
                 InfoDisappear();
             }
