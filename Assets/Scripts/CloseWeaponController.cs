@@ -17,15 +17,19 @@ public abstract class CloseWeaponController : MonoBehaviour
 
     protected void TryAttack()
     {
-        // 마우스 왼쪽 버튼을 누르면 코루틴 실행
-        if (Input.GetButton("Fire1"))
+        if (!Inventory.inventoryActivated)
         {
-            if (!isAttack)
+            // 마우스 왼쪽 버튼을 누르면 코루틴 실행
+            if (Input.GetButton("Fire1"))
             {
-                // 딜레이를 활용해야 하는데 가장 적합한 것이 Coroutine임
-                StartCoroutine(AttackCoroutine());
+                if (!isAttack)
+                {
+                    // 딜레이를 활용해야 하는데 가장 적합한 것이 Coroutine임
+                    StartCoroutine(AttackCoroutine());
+                }
             }
         }
+        
     }
 
     // 공격 

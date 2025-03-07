@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\CloseWeaponController.cs" />
     <Compile Include="Assets\Scripts\UI Script\Slot.cs" />
     <Compile Include="Assets\Scripts\CloseWeapon.cs" />
+    <Compile Include="Assets\Scripts\UI Script\DragSlot.cs" />
     <Compile Include="Assets\Scripts\Rock.cs" />
     <Compile Include="Assets\Scripts\WeaponManager.cs" />
     <Compile Include="Assets\Scripts\UI Script\StatusController.cs" />

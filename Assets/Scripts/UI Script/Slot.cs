@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
+using Unity.VisualScripting.Dependencies.Sqlite;
 
-public class Slot : MonoBehaviour
+public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
     public Item item;       // 획득한 아이템
     public int itemCount;       // 획득한 아이템 개수
@@ -15,6 +17,15 @@ public class Slot : MonoBehaviour
     private TextMeshProUGUI text_Count;
     [SerializeField]
     private GameObject go_CountImage;
+
+    // SerializeField는 자식 객체만 참조 가능. 따라서 Hierarchy에 존재하는 것을 참조하려면 FindObject를 사용해야 함.
+    // Hierarchy에 있는 프리펩은 직접 넣어주는 편이 좋다.
+    private WeaponManager theWeaponManager;
+
+    void Start()
+    {
+        theWeaponManager = FindObjectOfType<WeaponManager>();
+    }
 
     // 이미지의 투명도 조절
     private void SetColor(float _alpha)
@@ -68,5 +79,72 @@ public class Slot : MonoBehaviour
 
         go_CountImage.SetActive(false);
         text_Count.text = "0";
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        // 해당 인터페이스가 적용된 클래스에 우클릭을 할 경우 이하 내용이 실행
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            if (item != null)
+            {
+                if (item.itemType == Item.ItemType.Equipment)
+                {
+                    // 장착
+                    StartCoroutine(theWeaponManager.ChangeWeaponCoroutine(item.weaponType, item.itemName));
+                }
+                else
+                {
+                    // 소모
+                    Debug.Log(item.itemName + " 을 사용했습니다.");
+                    SetSlotCount(-1);
+                }
+            }
+        }
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        if (item != null)
+        {
+            DragSlot.instance.dragSlot = this;
+            DragSlot.instance.DragSetImage(itemImage);
+            DragSlot.instance.transform.position = eventData.position;
+        }
+            
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        if (item != null)
+        {
+            DragSlot.instance.transform.position = eventData.position;
+        }
+    }
+
+    // 그냥 드래그가 끝나기만 하면 호출
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        DragSlot.instance.SetColor(0);
+        DragSlot.instance.dragSlot = null;
+    }
+
+    // 다른 슬롯 위에서 드래그가 끝나면 OnEndDrag와 함께 호출
+    public void OnDrop(PointerEventData eventData)
+    {
+        if (DragSlot.instance.dragSlot != null)
+            ChangeSlot();
+    }
+
+    private void ChangeSlot()
+    {
+        Item _tempItem = item;
+        int _tempItemCount = itemCount;
+
+        AddItem(DragSlot.instance.dragSlot.item, DragSlot.instance.dragSlot.itemCount);
+        if (_tempItem != null)
+            DragSlot.instance.dragSlot.AddItem(_tempItem, _tempItemCount);
+        else
+            DragSlot.instance.dragSlot.ClearSlot();
     }
 }
