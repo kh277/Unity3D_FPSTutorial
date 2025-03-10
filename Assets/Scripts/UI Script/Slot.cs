@@ -18,13 +18,11 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     [SerializeField]
     private GameObject go_CountImage;
 
-    // SerializeField는 자식 객체만 참조 가능. 따라서 Hierarchy에 존재하는 것을 참조하려면 FindObject를 사용해야 함.
-    // Hierarchy에 있는 프리펩은 직접 넣어주는 편이 좋다.
-    private WeaponManager theWeaponManager;
+    private ItemEffectDatabase theItemEffectDatabase;
 
     void Start()
     {
-        theWeaponManager = FindObjectOfType<WeaponManager>();
+        theItemEffectDatabase = FindObjectOfType<ItemEffectDatabase>();
     }
 
     // 이미지의 투명도 조절
@@ -88,17 +86,10 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         {
             if (item != null)
             {
-                if (item.itemType == Item.ItemType.Equipment)
-                {
-                    // 장착
-                    StartCoroutine(theWeaponManager.ChangeWeaponCoroutine(item.weaponType, item.itemName));
-                }
-                else
-                {
-                    // 소모
-                    Debug.Log(item.itemName + " 을 사용했습니다.");
+                // 소모
+                theItemEffectDatabase.UseItem(item);
+                if (item.itemType == Item.ItemType.Used)
                     SetSlotCount(-1);
-                }
             }
         }
     }

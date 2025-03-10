@@ -72,13 +72,13 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         IsGround(); 
-        TryJump();
-        TryRun();
-        TryCrouch();
-        Move();
-        MoveCheck();
         if (!Inventory.inventoryActivated)
         {
+            TryJump();
+            TryRun();
+            TryCrouch();
+            Move();
+            MoveCheck();
             CameraRotation();
             CharactorRotation();
         }

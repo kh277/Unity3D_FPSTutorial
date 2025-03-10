@@ -362,6 +362,7 @@
 "Assets/Scripts/GunController.cs"
 "Assets/Scripts/HandController.cs"
 "Assets/Scripts/Item.cs"
+"Assets/Scripts/ItemEffectDatabase.cs"
 "Assets/Scripts/ItemPickUp.cs"
 "Assets/Scripts/PickaxeController.cs"
 "Assets/Scripts/PlayerController.cs"
