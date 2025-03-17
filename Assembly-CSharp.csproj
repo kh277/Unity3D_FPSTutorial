@@ -78,6 +78,7 @@
     <Compile Include="Assets\Scripts\UI Script\DragSlot.cs" />
     <Compile Include="Assets\Scripts\Rock.cs" />
     <Compile Include="Assets\Scripts\WeaponManager.cs" />
+    <Compile Include="Assets\Scripts\NPC\Pig.cs" />
     <Compile Include="Assets\Scripts\ItemEffectDatabase.cs" />
     <Compile Include="Assets\Scripts\UI Script\StatusController.cs" />
     <Compile Include="Assets\Scripts\WeaponSway.cs" />
