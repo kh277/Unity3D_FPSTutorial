@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\HandController.cs" />
     <Compile Include="Assets\Scripts\Crosshair.cs" />
     <Compile Include="Assets\Scripts\Gun.cs" />
+    <Compile Include="Assets\Scripts\NPC\FieldOfViewAngle.cs" />
     <Compile Include="Assets\Scripts\PickaxeController.cs" />
     <Compile Include="Assets\Scripts\GunController.cs" />
     <Compile Include="Assets\Scripts\UI Script\Inventory.cs" />
